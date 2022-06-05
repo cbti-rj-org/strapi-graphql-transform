@@ -118,20 +118,14 @@ export function transformObject<
 /** @ignore */
 const transformKey = (
   attr: string,
-  obj: StrapiItem | StrapiItem[],
+  obj: StrapiItem,
   newObject: Record<string, unknown>
 ): void => {
-  if (Array.isArray(obj)) {
-    newObject[attr] = obj.map((a) => {
-      return transformObject({ data: a } as StrapiResponseResultSingle);
-    });
-  } else {
-    if (!newObject.id && obj.id) {
-      newObject.id = obj.id;
-    }
-    const value: StrapiKeys = obj.attributes[attr];
-    execKeyScenarios(attr, value, newObject);
+  if (!newObject.id && obj.id) {
+    newObject.id = obj.id;
   }
+  const value: StrapiKeys = obj.attributes[attr];
+  execKeyScenarios(attr, value, newObject);
 };
 
 /** @ignore */
