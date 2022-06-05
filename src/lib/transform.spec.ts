@@ -130,3 +130,17 @@ test('test transformResults', (t) => {
   );
   t.deepEqual(transformedData, TransformedResults);
 });
+
+test('test pagination error', (t) => {
+  const error = t.throws(() =>
+    transformResults<Document>(StrapiSingleResponse as StrapiResponseRootArray)
+  );
+  t.is(error.message, 'No pagination found');
+});
+
+test('test remove properties with __', (t) => {
+  const transformedData = transformResult(
+    StrapiSingleResponse as StrapiResponseRootSingle
+  );
+  t.falsy(transformedData['__typename']);
+});
