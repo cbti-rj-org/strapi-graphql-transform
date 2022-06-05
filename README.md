@@ -1,3 +1,3 @@
 # strapi-graphql-transform
 
-Clean strapi´s graphql responses
+Transform strapi's graphql responses to a simpler Object structure.
