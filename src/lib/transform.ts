@@ -17,11 +17,14 @@ import {
  *
  * ### Example (es module)
  * ```typescript
- * import { transformResults } from '@cbtirj/strapi-graphql-transform';
+ * import { transformResults } from 'strapi-graphql-transform';
  *
  * const { result } = useQuery(DOCUMENTS_QUERY);
  * const { data, pagination } = transformResults<DocumentModel>(result);
+ * console.log(data);
+ * console.log(pagination);
  * // => [{ ...DocumentModel }, { ...DocumentModel }]
+ * // => { page: 1, pageSize: 2, total: 6, pageCount: 3, }
  * ```
  *
  * @param {StrapiResponseRootArray} result - GraphQL result from strapi array query.
@@ -40,10 +43,11 @@ export const transformResults = <T extends Record<string, unknown>>(
  *
  * ### Example (es module)
  * ```typescript
- * import { transformResult } from '@cbtirj/strapi-graphql-transform';
+ * import { transformResult } from 'strapi-graphql-transform';
  *
  * const { result } = useQuery(SINGLE_DOCUMENT_QUERY);
  * const data = transformResult<DocumentModel>(result);
+ * console.log(data);
  * // => { ...DocumentModel }
  * ```
  *
