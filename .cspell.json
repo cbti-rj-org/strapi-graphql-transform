@@ -21,6 +21,8 @@
     "prettierignore",
     "sandboxed",
     "Strapi",
+    "strapi",
+    "strapi's",
     "transpiled",
     "typedoc",
     "untracked"
