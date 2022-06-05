@@ -58,6 +58,18 @@ const StrapiSampleDocument = {
         },
       ],
     },
+    dynamicZone: [
+      {
+        id: '3',
+        text: 'Some text',
+        __typename: 'ComponentText',
+      },
+      {
+        id: '4',
+        scr: 'source',
+        __typename: 'ComponentImage',
+      },
+    ],
   },
 };
 
@@ -81,6 +93,18 @@ const TransformedSampleDocument = {
       id: '55',
       src: 'source',
       alt: 'alt',
+    },
+  ],
+  dynamicZone: [
+    {
+      id: '3',
+      text: 'Some text',
+      __typename: 'ComponentText',
+    },
+    {
+      id: '4',
+      scr: 'source',
+      __typename: 'ComponentImage',
     },
   ],
 };
@@ -136,11 +160,4 @@ test('test pagination error', (t) => {
     transformResults<Document>(StrapiSingleResponse as StrapiResponseRootArray)
   );
   t.is(error.message, 'No pagination found');
-});
-
-test('test remove properties with __', (t) => {
-  const transformedData = transformResult(
-    StrapiSingleResponse as StrapiResponseRootSingle
-  );
-  t.falsy(transformedData['__typename']);
 });

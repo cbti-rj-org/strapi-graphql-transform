@@ -121,9 +121,6 @@ const transformKey = (
   obj: StrapiItem | StrapiItem[],
   newObject: Record<string, unknown>
 ): void => {
-  if (attr.includes('__')) {
-    return;
-  }
   if (Array.isArray(obj)) {
     newObject[attr] = obj.map((a) => {
       return transformObject({ data: a } as StrapiResponseResultSingle);
