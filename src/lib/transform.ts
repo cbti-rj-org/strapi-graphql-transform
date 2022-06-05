@@ -144,3 +144,17 @@ const execKeyScenarios = (
     newObject[attr] = value;
   }
 };
+
+export {
+  StrapiItem,
+  StrapiKeys,
+  StrapiPagination,
+  StrapiResponseResult,
+  StrapiResponseResultArray,
+  StrapiResponseResults,
+  StrapiResponseResultSingle,
+  StrapiResponseRoot,
+  StrapiResponseRootArray,
+  StrapiResponseRootSingle,
+  StrapiTransformedItems,
+};
