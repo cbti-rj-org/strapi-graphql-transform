@@ -1,0 +1,225 @@
+<!doctype html>
+<html class="default no-js">
+<head>
+	<meta charset="utf-8">
+	<meta http-equiv="X-UA-Compatible" content="IE=edge">
+	<title>strapi-graphql-transform</title>
+	<meta name="description" content="Documentation for strapi-graphql-transform">
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+	<link rel="stylesheet" href="assets/css/main.css">
+</head>
+<body>
+<header>
+	<div class="tsd-page-toolbar">
+		<div class="container">
+			<div class="table-wrap">
+				<div class="table-cell" id="tsd-search" data-index="assets/js/search.json" data-base=".">
+					<div class="field">
+						<label for="tsd-search-field" class="tsd-widget search no-caption">Search</label>
+						<input id="tsd-search-field" type="text" />
+					</div>
+					<ul class="results">
+						<li class="state loading">Preparing search index...</li>
+						<li class="state failure">The search index is not available</li>
+					</ul>
+					<a href="index.html" class="title">strapi-graphql-transform</a>
+				</div>
+				<div class="table-cell" id="tsd-widgets">
+					<div id="tsd-filter">
+						<a href="#" class="tsd-widget options no-caption" data-toggle="options">Options</a>
+						<div class="tsd-filter-group">
+							<div class="tsd-select" id="tsd-filter-visibility">
+								<span class="tsd-select-label">All</span>
+								<ul class="tsd-select-list">
+									<li data-value="public">Public</li>
+									<li data-value="protected">Public/Protected</li>
+									<li data-value="private" class="selected">All</li>
+								</ul>
+							</div>
+							<input type="checkbox" id="tsd-filter-inherited" checked />
+							<label class="tsd-widget" for="tsd-filter-inherited">Inherited</label>
+							<input type="checkbox" id="tsd-filter-externals" checked />
+							<label class="tsd-widget" for="tsd-filter-externals">Externals</label>
+							<input type="checkbox" id="tsd-filter-only-exported" />
+							<label class="tsd-widget" for="tsd-filter-only-exported">Only exported</label>
+						</div>
+					</div>
+					<a href="#" class="tsd-widget menu no-caption" data-toggle="menu">Menu</a>
+				</div>
+			</div>
+		</div>
+	</div>
+	<div class="tsd-page-title">
+		<div class="container">
+			<ul class="tsd-breadcrumb">
+				<li>
+					<a href="globals.html">Globals</a>
+				</li>
+			</ul>
+			<h1>strapi-graphql-transform</h1>
+		</div>
+	</div>
+</header>
+<div class="container container-main">
+	<div class="row">
+		<div class="col-8 col-content">
+			<div class="tsd-panel tsd-typography">
+				<a href="#strapi-graphql-transform" id="strapi-graphql-transform" style="color: inherit; text-decoration: none;">
+					<h1>strapi-graphql-transform</h1>
+				</a>
+				<p>Transform strapi&#39;s graphql responses to a simpler Object structure.</p>
+				<pre><code class="language-js"><span class="hljs-comment">// Response example from Strapi graphql</span>
+<span class="hljs-keyword">const</span> StrapiSampleResponse = {
+  <span class="hljs-attr">document</span>: {
+    <span class="hljs-attr">__typename</span>: <span class="hljs-string">&#x27;DocumentResponse&#x27;</span>,
+    <span class="hljs-attr">data</span>: [
+      {
+        <span class="hljs-attr">__typename</span>: <span class="hljs-string">&#x27;Document&#x27;</span>,
+        <span class="hljs-attr">id</span>: <span class="hljs-string">&#x27;2&#x27;</span>,
+        <span class="hljs-attr">attributes</span>: {
+          <span class="hljs-attr">title</span>: <span class="hljs-string">&#x27;Sample title&#x27;</span>,
+          <span class="hljs-attr">description</span>: <span class="hljs-string">&#x27;Sample description&#x27;</span>,
+          <span class="hljs-attr">tags</span>: [<span class="hljs-string">&#x27;tag1&#x27;</span>, <span class="hljs-string">&#x27;tag2&#x27;</span>],
+          <span class="hljs-attr">author</span>: {
+            <span class="hljs-attr">data</span>: {
+              <span class="hljs-attr">id</span>: <span class="hljs-string">&#x27;34&#x27;</span>,
+              <span class="hljs-attr">attributes</span>: {
+                <span class="hljs-attr">name</span>: <span class="hljs-string">&#x27;Author&#x27;</span>,
+                <span class="hljs-attr">roles</span>: [<span class="hljs-string">&#x27;admin&#x27;</span>],
+              },
+            },
+          },
+          <span class="hljs-attr">images</span>: {
+            <span class="hljs-attr">data</span>: [
+              {
+                <span class="hljs-attr">id</span>: <span class="hljs-string">&#x27;54&#x27;</span>,
+                <span class="hljs-attr">attributes</span>: {
+                  <span class="hljs-attr">src</span>: <span class="hljs-string">&#x27;source&#x27;</span>,
+                  <span class="hljs-attr">alt</span>: <span class="hljs-string">&#x27;alt&#x27;</span>,
+                },
+              },
+              {
+                <span class="hljs-attr">id</span>: <span class="hljs-string">&#x27;55&#x27;</span>,
+                <span class="hljs-attr">attributes</span>: {
+                  <span class="hljs-attr">src</span>: <span class="hljs-string">&#x27;source&#x27;</span>,
+                  <span class="hljs-attr">alt</span>: <span class="hljs-string">&#x27;alt&#x27;</span>,
+                },
+              },
+            ],
+          },
+        },
+      },
+    ],
+    <span class="hljs-attr">meta</span>: {
+      <span class="hljs-attr">pagination</span>: {
+        <span class="hljs-attr">page</span>: <span class="hljs-number">1</span>,
+        <span class="hljs-attr">pageSize</span>: <span class="hljs-number">2</span>,
+        <span class="hljs-attr">total</span>: <span class="hljs-number">6</span>,
+        <span class="hljs-attr">pageCount</span>: <span class="hljs-number">3</span>,
+      },
+    },
+  },
+};
+
+<span class="hljs-comment">// Transformed object</span>
+<span class="hljs-keyword">const</span> TransformedResults = {
+  <span class="hljs-attr">data</span>: [
+    {
+      <span class="hljs-attr">id</span>: <span class="hljs-string">&#x27;2&#x27;</span>,
+      <span class="hljs-attr">title</span>: <span class="hljs-string">&#x27;Sample title&#x27;</span>,
+      <span class="hljs-attr">description</span>: <span class="hljs-string">&#x27;Sample description&#x27;</span>,
+      <span class="hljs-attr">tags</span>: [<span class="hljs-string">&#x27;tag1&#x27;</span>, <span class="hljs-string">&#x27;tag2&#x27;</span>],
+      <span class="hljs-attr">author</span>: {
+        <span class="hljs-attr">id</span>: <span class="hljs-string">&#x27;34&#x27;</span>,
+        <span class="hljs-attr">name</span>: <span class="hljs-string">&#x27;Author&#x27;</span>,
+        <span class="hljs-attr">roles</span>: [<span class="hljs-string">&#x27;admin&#x27;</span>],
+      },
+      <span class="hljs-attr">images</span>: [
+        {
+          <span class="hljs-attr">id</span>: <span class="hljs-string">&#x27;54&#x27;</span>,
+          <span class="hljs-attr">src</span>: <span class="hljs-string">&#x27;source&#x27;</span>,
+          <span class="hljs-attr">alt</span>: <span class="hljs-string">&#x27;alt&#x27;</span>,
+        },
+        {
+          <span class="hljs-attr">id</span>: <span class="hljs-string">&#x27;55&#x27;</span>,
+          <span class="hljs-attr">src</span>: <span class="hljs-string">&#x27;source&#x27;</span>,
+          <span class="hljs-attr">alt</span>: <span class="hljs-string">&#x27;alt&#x27;</span>,
+        },
+      ],
+    },
+  ],
+  <span class="hljs-attr">pagination</span>: {
+    <span class="hljs-attr">page</span>: <span class="hljs-number">1</span>,
+    <span class="hljs-attr">pageSize</span>: <span class="hljs-number">2</span>,
+    <span class="hljs-attr">total</span>: <span class="hljs-number">6</span>,
+    <span class="hljs-attr">pageCount</span>: <span class="hljs-number">3</span>,
+  },
+};
+</code></pre>
+				<a href="#installation" id="installation" style="color: inherit; text-decoration: none;">
+					<h3>Installation</h3>
+				</a>
+				<pre><code class="language-bash">npm install --save strapi-graphql-transform
+
+<span class="hljs-comment">#or</span>
+
+yarn add strapi-graphql-transform
+</code></pre>
+				<a href="#usage" id="usage" style="color: inherit; text-decoration: none;">
+					<h3>Usage</h3>
+				</a>
+				<pre><code class="language-typescript"><span class="hljs-comment">// Multiple responses (find)</span>
+<span class="hljs-keyword">import</span> { transformResults } <span class="hljs-keyword">from</span> <span class="hljs-string">&#x27;strapi-graphql-transform&#x27;</span>;
+
+<span class="hljs-keyword">const</span> { result } = useQuery(DOCUMENTS_QUERY);
+<span class="hljs-keyword">const</span> { data, pagination } = transformResults&lt;DocumentModel&gt;(result);
+<span class="hljs-built_in">console</span>.log(data);
+<span class="hljs-built_in">console</span>.log(pagination);
+<span class="hljs-comment">// =&gt; [{ ...DocumentModel }, { ...DocumentModel }]</span>
+<span class="hljs-comment">// =&gt; { page: 1, pageSize: 2, total: 6, pageCount: 3, }</span>
+
+<span class="hljs-comment">// Single response (get)</span>
+<span class="hljs-keyword">import</span> { transformResult } <span class="hljs-keyword">from</span> <span class="hljs-string">&#x27;strapi-graphql-transform&#x27;</span>;
+
+<span class="hljs-keyword">const</span> { result } = useQuery(DOCUMENTS_QUERY);
+<span class="hljs-keyword">const</span> data = transformResult&lt;DocumentModel&gt;(result);
+<span class="hljs-built_in">console</span>.log(data);
+<span class="hljs-comment">// =&gt; { ...DocumentModel }</span>
+</code></pre>
+			</div>
+		</div>
+		<div class="col-4 col-menu menu-sticky-wrap menu-highlight">
+			<nav class="tsd-navigation primary">
+				<ul>
+					<li class="globals  ">
+						<a href="globals.html"><em>Globals</em></a>
+					</li>
+				</ul>
+			</nav>
+			<nav class="tsd-navigation secondary menu-sticky">
+				<ul class="before-current">
+					<li class=" tsd-kind-function tsd-has-type-parameter">
+						<a href="globals.html#transformresult" class="tsd-kind-icon">transform<wbr>Result</a>
+					</li>
+					<li class=" tsd-kind-function tsd-has-type-parameter">
+						<a href="globals.html#transformresults" class="tsd-kind-icon">transform<wbr>Results</a>
+					</li>
+				</ul>
+			</nav>
+		</div>
+	</div>
+</div>
+<footer class="with-border-bottom">
+	<div class="container">
+		<h2>Legend</h2>
+		<div class="tsd-legend-group">
+		</div>
+	</div>
+</footer>
+<div class="container tsd-generator">
+	<p>Generated using <a href="https://typedoc.org/" target="_blank">TypeDoc</a></p>
+</div>
+<div class="overlay"></div>
+<script src="assets/js/main.js"></script>
+</body>
+</html>
