@@ -1,3 +1,4 @@
+// eslint-disable-next-line @typescript-eslint/no-explicit-any
 export interface StrapiBasicItem extends Record<string, any> {
   __typename: string;
 }
