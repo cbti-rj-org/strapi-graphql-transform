@@ -12,6 +12,13 @@ import {
   StrapiTransformedItems,
 } from '../types/transform';
 
+const defaultPagination: StrapiPagination = {
+  page: 0,
+  pageSize: 0,
+  total: 0,
+  pageCount: 0,
+};
+
 /**
  * Transform response from Strapi GraphQL for list of Types with pagination.
  *
@@ -32,7 +39,10 @@ import {
  */
 export const transformResults = <T extends Record<string, unknown>>(
   result: StrapiResponseRootArray
-): StrapiTransformedItems<T> => {
+): {
+  data: T[];
+  pagination: StrapiPagination;
+} => {
   const data: T[] = transformResult<T>(result);
   const pagination: StrapiPagination = transformPagination(result);
   return { data, pagination };
@@ -82,7 +92,7 @@ const transformPagination = (
     const pagination: StrapiPagination = data.meta.pagination;
     return pagination;
   } else {
-    throw new Error('No pagination found');
+    return defaultPagination;
   }
 };
 
@@ -106,12 +116,14 @@ export function transformObject<
       return newObject;
     });
     return data;
-  } else {
+  } else if (obj.data) {
     const newObject = {} as T;
     Object.keys(obj.data.attributes).forEach((attr: string): void =>
       transformKey(attr, obj.data as StrapiItem, newObject)
     );
     return newObject;
+  } else {
+    return {} as T;
   }
 }
 
@@ -145,7 +157,7 @@ const execKeyScenarios = (
   }
 };
 
-export {
+export type {
   StrapiItem,
   StrapiKeys,
   StrapiPagination,

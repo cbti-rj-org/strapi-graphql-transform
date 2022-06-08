@@ -27,11 +27,11 @@ export interface StrapiItem {
 }
 
 export interface StrapiResponseResultSingle extends StrapiBasicItem {
-  data: StrapiItem;
+  data?: StrapiItem;
 }
 
 export interface StrapiResponseResultArray extends StrapiBasicItem {
-  data: StrapiItem[];
+  data?: StrapiItem[];
 }
 
 export type StrapiResponseResult =
@@ -51,7 +51,7 @@ export interface StrapiPagination {
   pageCount: number;
 }
 
-export interface StrapiTransformedItems<T extends Record<string, unknown>> {
+export interface StrapiTransformedItems<T> {
   data: T[];
   pagination: StrapiPagination;
 }

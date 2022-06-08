@@ -1,6 +1,6 @@
 import test from 'ava';
 
-import {
+import type {
   StrapiResponseRootArray,
   StrapiResponseRootSingle,
 } from './../types/transform.d';
@@ -152,6 +152,7 @@ test('test transformResults', (t) => {
   const transformedData = transformResults<Document>(
     StrapiMultiResponse as StrapiResponseRootArray
   );
+  transformedData.data;
   t.deepEqual(transformedData, TransformedResults);
 });
 
