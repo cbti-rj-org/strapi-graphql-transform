@@ -5,9 +5,9 @@ import type {
   StrapiResponseRootSingle,
 } from './../types/transform.d';
 import {
+  defaultPagination,
   transformResult,
   transformResults,
-  defaultPagination,
 } from './transform';
 
 type Author = {
