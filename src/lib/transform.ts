@@ -12,7 +12,7 @@ import {
   StrapiTransformedItems,
 } from '../types/transform';
 
-const defaultPagination: StrapiPagination = {
+export const defaultPagination: StrapiPagination = {
   page: 0,
   pageSize: 0,
   total: 0,

@@ -4,7 +4,11 @@ import type {
   StrapiResponseRootArray,
   StrapiResponseRootSingle,
 } from './../types/transform.d';
-import { transformResult, transformResults } from './transform';
+import {
+  transformResult,
+  transformResults,
+  defaultPagination,
+} from './transform';
 
 type Author = {
   name: string;
@@ -156,9 +160,10 @@ test('test transformResults', (t) => {
   t.deepEqual(transformedData, TransformedResults);
 });
 
-test('test pagination error', (t) => {
-  const error = t.throws(() =>
-    transformResults<Document>(StrapiSingleResponse as StrapiResponseRootArray)
+test('test no pagination', (t) => {
+  const transformedData = transformResults<Document>(
+    StrapiSingleResponse as StrapiResponseRootArray
   );
-  t.is(error.message, 'No pagination found');
+
+  t.is(transformedData.pagination, defaultPagination);
 });
