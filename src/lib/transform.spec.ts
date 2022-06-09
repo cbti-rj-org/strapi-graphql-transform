@@ -167,3 +167,11 @@ test('test no pagination', (t) => {
 
   t.is(transformedData.pagination, defaultPagination);
 });
+
+test('test no data', (t) => {
+  const transformedData = transformResult({
+    home: { __typename: 'Home' },
+  } as StrapiResponseRootSingle);
+
+  t.deepEqual(transformedData, {});
+});
